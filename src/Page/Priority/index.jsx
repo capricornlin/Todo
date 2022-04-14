@@ -1,6 +1,8 @@
 import Header from "../../Component/Header";
 import { useSelector } from "react-redux";
 import TodoItem from "../Home/Component/TodoItem";
+import { useAuth } from "../../Context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -16,6 +18,7 @@ const container = {
 };
 
 const Priority = () => {
+  const { currentUser } = useAuth();
   const todolist = useSelector((state) => state.todoReducer);
 
   const sortedtodos = [...todolist];
@@ -27,7 +30,7 @@ const Priority = () => {
 
   sortedtodos.sort((a, b) => map.get(b.priority) - map.get(a.priority));
 
-  return (
+  return currentUser ? (
     <>
       <Header />
       <motion.div
@@ -100,6 +103,8 @@ const Priority = () => {
         </div>
       </motion.div>
     </>
+  ) : (
+    <Navigate to="/Signin" />
   );
 };
 

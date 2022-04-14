@@ -1,6 +1,8 @@
 import Header from "../../Component/Header";
 import { useSelector } from "react-redux";
 import TodoItem from "../Home/Component/TodoItem";
+import { useAuth } from "../../Context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -16,6 +18,12 @@ const container = {
 };
 
 const Complete = () => {
+  const { currentUser } = useAuth();
+
+  // if (!currentUser) {
+  //   return <Navigate to="/Signin" />;
+  // }
+
   const todolist = useSelector((state) => state.todoReducer);
   const sortedtodos = [...todolist];
   const map = new Map([
@@ -26,7 +34,7 @@ const Complete = () => {
 
   sortedtodos.sort((a, b) => map.get(b.priority) - map.get(a.priority));
   // console.log(todolist);
-  return (
+  return currentUser ? (
     <>
       <Header />
 
@@ -67,6 +75,8 @@ const Complete = () => {
         </AnimatePresence>
       </motion.div>
     </>
+  ) : (
+    <Navigate to="/Signin" />
   );
 };
 

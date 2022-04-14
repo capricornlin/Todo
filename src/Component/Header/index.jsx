@@ -1,6 +1,9 @@
 import { AiOutlineMenu } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../../Context/AuthContext";
+import toast from "react-hot-toast";
+
 import { Toaster } from "react-hot-toast";
 import { BsFillMoonFill, BsFillSunFill, BsMoonStarsFill } from "react-icons/bs";
 
@@ -52,6 +55,57 @@ const PriorityNav = () => {
   );
 };
 
+const SigninNav = () => {
+  const go = useNavigate();
+  return (
+    <>
+      <div
+        className="cursor-pointer my-1 text-white hover:text-rose-400"
+        onClick={() => {
+          go("/Signin");
+        }}
+      >
+        Signin
+      </div>
+    </>
+  );
+};
+
+const RegisterNav = () => {
+  const go = useNavigate();
+  return (
+    <>
+      <div
+        className="cursor-pointer my-1 text-white hover:text-rose-400"
+        onClick={() => {
+          go("/Register");
+        }}
+      >
+        Register
+      </div>
+    </>
+  );
+};
+
+const Logout = () => {
+  const go = useNavigate();
+  const { logout } = useAuth();
+  return (
+    <>
+      <div
+        className="cursor-pointer my-1 text-white hover:text-rose-400"
+        onClick={() => {
+          toast.success("Logout Successfully");
+          logout();
+          // go("/");
+        }}
+      >
+        Logout
+      </div>
+    </>
+  );
+};
+
 const LightMode = () => {
   const ModeLightHandler = () => {
     document.documentElement.classList.remove("dark");
@@ -80,6 +134,7 @@ const DarkMode = () => {
 
 const Nav = () => {
   const go = useNavigate();
+  const { currentUser } = useAuth();
   const ModeLightHandler = () => {
     document.documentElement.classList.remove("dark");
   };
@@ -96,14 +151,45 @@ const Nav = () => {
           <div className="mx-2">
             <CompleteNav />
           </div>
-          <div>
+          <div className="mx-2">
             <PriorityNav />
           </div>
+          {/* {!currentUser && (
+            <div className="mx-2">
+              <SigninNav />
+            </div>
+          )}
+          {!currentUser && (
+            <div className="mx-2">
+              <RegisterNav />
+            </div>
+          )}
+          {currentUser && (
+            <div>
+              <Logout />
+            </div>
+          )} */}
         </div>
 
         <div className="mx-10 flex items-center ">
+          {!currentUser && (
+            <div className="mx-2">
+              <SigninNav />
+            </div>
+          )}
+          {!currentUser && (
+            <div className="mx-2">
+              <RegisterNav />
+            </div>
+          )}
+          {currentUser && (
+            <div className="mx-2">
+              <Logout />
+            </div>
+          )}
+
           <BsFillSunFill
-            className="mx-2 text-white hover:scale-110 duration-100 hover:cursor-pointer  text-3xl"
+            className="ml-2 mx-2 text-white hover:scale-110 duration-100 hover:cursor-pointer  text-3xl"
             onClick={ModeLightHandler}
           />
 
