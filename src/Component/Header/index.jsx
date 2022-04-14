@@ -112,7 +112,7 @@ const LightMode = () => {
   };
   return (
     <>
-      <div className="cursor-pointer my-1 hover:text-orange-500" onClick={ModeLightHandler}>
+      <div className="text-white cursor-pointer my-1 hover:text-orange-500" onClick={ModeLightHandler}>
         LightMode
       </div>
     </>
@@ -125,7 +125,7 @@ const DarkMode = () => {
   };
   return (
     <>
-      <div className="cursor-pointer my-1 hover:text-orange-500" onClick={ModeDarkHandler}>
+      <div className="text-white cursor-pointer my-1 hover:text-orange-500" onClick={ModeDarkHandler}>
         DarkMode
       </div>
     </>
@@ -205,6 +205,7 @@ const Nav = () => {
 
 const Header = () => {
   const [navpop, setNavpop] = useState(false);
+  const { currentUser } = useAuth();
   // console.log("navpop", navpop);
 
   function NavpopHandler() {
@@ -232,6 +233,9 @@ const Header = () => {
                 <HomeNav />
                 <CompleteNav />
                 <PriorityNav />
+                {!currentUser && <SigninNav />}
+                {!currentUser && <RegisterNav />}
+                {currentUser && <Logout />}
                 <LightMode />
                 <DarkMode />
               </div>
