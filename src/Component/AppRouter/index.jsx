@@ -5,6 +5,7 @@ import Priority from "../../Page/Priority";
 import Signin from "../../Component/SignIn";
 import Register from "../Register";
 import { useAuth } from "../../Context/AuthContext";
+import NotFound from "../NotFound";
 
 export default function AppRouter() {
   // const { currentUser } = useAuth;
@@ -16,6 +17,7 @@ export default function AppRouter() {
         <Route path="/Priority" element={<Priority />} />
         <Route path="/Signin" element={<Signin />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </>
   );
