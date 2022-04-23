@@ -42,7 +42,10 @@ const Modal = ({ ModalType, todoModal, setTodoModal, todo }) => {
     if (ModalType === "update" && todo) {
       setTitle(todo.title);
       setType(todo.type);
-      // console.log("update open");
+      // console.log("todo.type", todo.type);
+      setPriority(todo.priority);
+      // console.log("todo.priority", todo.priority);
+      // console.log("update open666");
     } else {
       setTitle("");
     }

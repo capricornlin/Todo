@@ -44,7 +44,7 @@ const SignIn = () => {
               <input
                 className="rounded-lg w-full my-2"
                 value={email}
-                placeholder="Input your email"
+                placeholder="Input your email, Or just Enter test@gmail.com"
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 name="email"
@@ -58,7 +58,7 @@ const SignIn = () => {
               </label>
               <input
                 className="rounded-lg w-full my-2"
-                placeholder="Input your password"
+                placeholder="Input your password, Or just Enter 123456"
                 onChange={(e) => setPassword(e.target.value)}
                 minLength="6"
                 type="password"
